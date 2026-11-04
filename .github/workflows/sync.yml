@@ -1,0 +1,59 @@
+name: Sync stable release
+
+on:
+    schedule:
+        - cron: "23 * * * *"
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: Published stable RunWield tag (blank selects latest)
+                required: false
+                type: string
+
+permissions:
+    contents: write
+
+concurrency:
+    group: sync-stable-release
+    cancel-in-progress: false
+
+jobs:
+    sync:
+        if: github.repository == 'RunWield/plugins' && github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  ref: main
+                  fetch-depth: 0
+            - uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version-file: .bun-version
+            - run: bun run test
+            - name: Import published stable package
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  RELEASE_TAG: ${{ inputs.tag }}
+              run: |
+                  if [[ -n "$RELEASE_TAG" ]]; then
+                    bun run sync "$RELEASE_TAG"
+                  else
+                    bun run sync
+                  fi
+            - run: bun run check
+            - run: bun run test
+            - name: Publish generated files and immutable tag
+              run: |
+                  set -euo pipefail
+                  tag=$(bun -e 'console.log((await Bun.file("release.json").json()).tag)')
+                  git config user.name 'github-actions[bot]'
+                  git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+                  git add plugins .agents .claude-plugin LICENSE release.json
+                  if ! git diff --cached --quiet; then
+                    git commit -m "Publish Connect plugins from $tag"
+                  fi
+                  if ! git show-ref --verify --quiet "refs/tags/$tag"; then
+                    git tag "$tag"
+                  fi
+                  git push --atomic origin HEAD:main "refs/tags/$tag"

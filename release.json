@@ -1,0 +1,27 @@
+{
+    "repository": "RunWield/runwield",
+    "tag": "v0.14.4",
+    "commit": "d37549866d504261da6e1efcd29d955309162cca",
+    "url": "https://github.com/RunWield/runwield/releases/tag/v0.14.4",
+    "files": {
+        ".agents/plugins/marketplace.json": "f36a9ad4c5121729527493a2a860459dd3b509f6ff6766e0fb8313509bf629b8",
+        ".claude-plugin/marketplace.json": "953fc7cefb7f7bee260d691302e25659a505adde66babafa9e1b061b2185ba41",
+        "LICENSE": "2e54d4c4e041f0773b8eb5c995c0c775abc67d440cfdab7423801a503884500e",
+        "plugins/claude/.claude-plugin/plugin.json": "0f1dfa62ca7152aac36cd8e61363e45a05238a997fa324e26691d8c7bd6af9b2",
+        "plugins/claude/.mcp.json": "96e7ab2c0ed37c3ecebc9bf920b53a8f10b01112c2dad5f3ba869c72f41ab5bb",
+        "plugins/claude/commands/implement.md": "a1b4303ad7469c19ba6e162ab7009a63258cf580414ea1e6a7f9486641ea7408",
+        "plugins/claude/commands/plan-review.md": "16a3e8ac3686ee195b094381b80b06c0786113b8fa54efdebefc603162addbbd",
+        "plugins/claude/commands/request.md": "89a60033e1e4af45bb9a47a3e1a120713a3b3e636f114ba128aa666ffbbeb651",
+        "plugins/claude/commands/validate.md": "0c8f142c47ecce42059c05539bd6ad856a5ba8e6fe41c60263b0de740645e63e",
+        "plugins/claude/runwield-adapter.json": "89222dfe433dcce08ec68bf344e83c4eeb70123feaa728791308c385b9ed8283",
+        "plugins/codex/.codex-plugin/plugin.json": "f629bdad0cc103bb8e35699584bcea596053f826836713ca268680efc33ea2b4",
+        "plugins/codex/.mcp.json": "a2c2703880e1a63d6e740936774000a80c9d599764a8cc50596beece8321039f",
+        "plugins/codex/runwield-adapter.json": "89222dfe433dcce08ec68bf344e83c4eeb70123feaa728791308c385b9ed8283",
+        "plugins/codex/skills/run/SKILL.md": "3271e440228073961baa342c25145d704d2f0bb43495a241ae7628fd20fbafce",
+        "plugins/codex/skills/run/agents/openai.yaml": "5293378a80e7b62a4630683cfdf8f05694b5b367cdde781e8b9aeaa6c045fc12",
+        "plugins/codex/skills/run/references/implementation.md": "4aadf7a571cfd89f98209a4c1c96d1f5a20b3f79cd8bfb2c7d4b02f25fac1a4f",
+        "plugins/codex/skills/run/references/planning.md": "7699dc896f7711ddad886bf0518de7e6f71d5d2ab2f731a21c11c521980acc54",
+        "plugins/codex/skills/run/references/review-chat.md": "f095c2fe3c87d5ed2ed27deb0262a27d4270399553b6afdb6b54cc0d27ae63d2",
+        "plugins/codex/skills/run/references/validation.md": "ef0a438434b0d3f87971abd6e330574288dab60ce0ad52cc669aa7f8520340f9"
+    }
+}
