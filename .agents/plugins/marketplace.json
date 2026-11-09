@@ -5,7 +5,7 @@
     },
     "plugins": [
         {
-            "name": "connect",
+            "name": "wld",
             "source": {
                 "source": "local",
                 "path": "./plugins/codex"

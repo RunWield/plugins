@@ -47,4 +47,4 @@ treat cancellation as approval or immediately reopen it without a new request.
 
 For `plan_ready`, immediately follow [Implementation](implementation.md) and call `start_execution`; Approve & Run
 needs no second confirmation. For `plan_saved` after Approve for Later, report that the Plan is Ready For Work and
-saved for later, then stop. Tell the user `$connect:run implement` or `$connect:run resume` can continue it later.
+saved for later, then stop. Tell the user `$wld:run implement` or `$wld:run resume` can continue it later.

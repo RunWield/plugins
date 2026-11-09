@@ -80,7 +80,7 @@ if (import.meta.main) {
             await rm(join(root, path), { recursive: true, force: true });
             await cp(join(staged, path), join(root, path), { recursive: true });
         }
-        console.log(`Prepared connect@runwield from ${release.tag} (${release.commit}).`);
+        console.log(`Prepared wld@runwield from ${release.tag} (${release.commit}).`);
     } finally {
         await rm(temporary, { recursive: true, force: true });
     }

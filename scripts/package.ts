@@ -78,16 +78,18 @@ export async function buildPackage(source: string, destination: string, release:
                 contents = Buffer.from(
                     contents
                         .toString("utf8")
-                        .replaceAll("$runwield:", "$connect:")
-                        .replaceAll("/runwield:", "/connect:"),
+                        .replaceAll("$runwield:", "$wld:")
+                        .replaceAll("/runwield:", "/wld:")
+                        .replaceAll("$connect:", "$wld:")
+                        .replaceAll("/connect:", "/wld:"),
                 );
             }
             await writeFile(target, contents);
         }
         const manifestPath = join(output, `.${host}-plugin/plugin.json`);
         const manifest: Manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-        assert(["runwield", "connect"].includes(manifest.name), "Unexpected upstream plugin identity");
-        manifest.name = "connect";
+        assert(["runwield", "connect", "wld"].includes(manifest.name), "Unexpected upstream plugin identity");
+        manifest.name = "wld";
         // Adapter versions participate in Core's compatibility checks. Preserve them.
         await writeJson(manifestPath, manifest);
     }
@@ -98,18 +100,18 @@ export async function buildPackage(source: string, destination: string, release:
     const codex: CodexMarketplace = JSON.parse(
         await readFile(join(source, ".agents/plugins/marketplace.json"), "utf8"),
     );
-    const codexEntry = codex.plugins.find((plugin) => ["runwield", "connect"].includes(plugin.name));
+    const codexEntry = codex.plugins.find((plugin) => ["runwield", "connect", "wld"].includes(plugin.name));
     assert(codex.name === "runwield" && codexEntry, "Missing RunWield Codex catalog entry");
-    codexEntry.name = "connect";
+    codexEntry.name = "wld";
     codexEntry.source = { source: "local", path: "./plugins/codex" };
     codex.plugins = [codexEntry];
     await writeJson(join(destination, ".agents/plugins/marketplace.json"), codex);
     const claude: ClaudeMarketplace = JSON.parse(
         await readFile(join(source, ".claude-plugin/marketplace.json"), "utf8"),
     );
-    const claudeEntry = claude.plugins.find((plugin) => ["runwield", "connect"].includes(plugin.name));
+    const claudeEntry = claude.plugins.find((plugin) => ["runwield", "connect", "wld"].includes(plugin.name));
     assert(claude.name === "runwield" && claudeEntry, "Missing RunWield Claude catalog entry");
-    claudeEntry.name = "connect";
+    claudeEntry.name = "wld";
     claudeEntry.source = "./plugins/claude";
     claude.plugins = [claudeEntry];
     await writeJson(join(destination, ".claude-plugin/marketplace.json"), claude);
@@ -130,22 +132,22 @@ export async function checkPackage(root: string): Promise<void> {
     assert.equal(claude.name, "runwield");
     assert.deepEqual(
         codex.plugins.map((entry) => [entry.name, entry.source.source, entry.source.path]),
-        [["connect", "local", "./plugins/codex"]],
+        [["wld", "local", "./plugins/codex"]],
     );
     assert.deepEqual(
         claude.plugins.map((entry) => [entry.name, entry.source]),
-        [["connect", "./plugins/claude"]],
+        [["wld", "./plugins/claude"]],
     );
     for (const host of ["codex", "claude"]) {
         const directory = join(root, "plugins", host);
         const manifest: Manifest = JSON.parse(await readFile(join(directory, `.${host}-plugin/plugin.json`), "utf8"));
-        assert.equal(manifest.name, "connect");
+        assert.equal(manifest.name, "wld");
         assert.match(manifest.version, /^\d+\.\d+\.\d+/);
         for (const file of await filesUnder(directory)) {
             if (file.endsWith(".json")) JSON.parse(await readFile(join(directory, file), "utf8"));
             if (!file.endsWith(".md")) continue;
             const text = await readFile(join(directory, file), "utf8");
-            assert(!/[$/]runwield:/.test(text), `Old command namespace in ${file}`);
+            assert(!/[$/](?:runwield|connect):/.test(text), `Old command namespace in ${file}`);
             for (const match of text.matchAll(/\]\(([^)]+)\)/g)) {
                 const link = match[1];
                 if (/^(?:https?:|#)/.test(link)) continue;
@@ -159,5 +161,5 @@ export async function checkPackage(root: string): Promise<void> {
 
 if (import.meta.main) {
     await checkPackage(process.cwd());
-    console.log("Both connect@runwield catalogs, package files, links, and release hashes are valid.");
+    console.log("Both wld@runwield catalogs, package files, links, and release hashes are valid.");
 }

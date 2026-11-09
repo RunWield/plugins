@@ -24,10 +24,10 @@ Core owns host and version compatibility.
    input and retry with a new `operationId`; reuse an ID only when retrying a call that returned no result.
 4. When `workflow.nextAction.kind` is `review`, show `review.url`. Wait with MCP `status` using `{ workflowId, waitForRevision: <current revision>, timeoutMs: 30000 }` while the browser review is pending. Core returns compact status when the revision or action changes, or when the wait times out; repeat with the returned revision if still pending. Do not poll with shell sleep or request full status. After feedback, dispatch the Planner with the new action ID and tell that worker to fetch its own complete instructions with `get_instructions`; revise the Plan and call `plan_written` with the current revision. The live browser page is reused for the next round. Browser edits are already saved; do not apply them twice.
 5. After cancellation, tell the user review was canceled and ask what to do next. The workflow remains open.
-   `/connect:plan-review` restores it in a fresh conversation. For `plan_ready`, immediately call `start_execution`
+   `/wld:plan-review` restores it in a fresh conversation. For `plan_ready`, immediately call `start_execution`
    with a new `operationId`, current `workflowId` and `expectedRevision`, and `payload: {}`. No separate confirmation is
    needed after Approve & Run. For `plan_saved`, report that the Plan is Ready For Work, saved for later, and stop.
-   Tell the user `/connect:implement` starts it. Follow the implementation flow below only for `plan_ready`.
+   Tell the user `/wld:implement` starts it. Follow the implementation flow below only for `plan_ready`.
    Answer unrelated requests as ordinary Claude Code.
 
 ## Implementation flow
@@ -46,11 +46,11 @@ Core owns host and version compatibility.
   and needs no RunWield MCP connection.
 - When the worker returns completed work, this coordinating conversation calls `task_completed` with the issued
   `actionId`, current `expectedRevision`, and `payload.message` containing its bullet report. Do not submit a blocker or
-  a prose claim of "done" as completion. After loss or cancellation, use `status` or `/connect:implement` to restore
+  a prose claim of "done" as completion. After loss or cancellation, use `status` or `/wld:implement` to restore
   the same handoff, not `start_execution` again. On rejection, read `status` and repair; do not bypass guards.
 - For `implemented`, report the Core result, not the worker's earlier Git state: Core saved the Git checkpoint for
   worktree execution. Do not say changes are uncommitted or that `.gitignore` was untouched. Implementation is recorded,
-  not Verified. Immediately follow `/connect:validate` for Core validation with fresh Claude workers. Publication
+  not Verified. Immediately follow `/wld:validate` for Core validation with fresh Claude workers. Publication
   remains pending; the workflow stays open.
 
 ## Review chat

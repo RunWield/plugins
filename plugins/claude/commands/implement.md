@@ -36,8 +36,8 @@ Core owns host and version compatibility.
    through the reported recovery path; never bypass guards.
 5. For `implemented`, report Core's saved Git checkpoint for worktree execution, not the worker's earlier uncommitted
    state. Mention the disclosed `.gitignore` exception. Implementation is recorded, not Verified. Immediately follow
-   `/connect:validate` to run Core validation with fresh Claude review and repair workers. Publication remains pending.
-   For planning or review actions, follow `/connect:plan-review`. If no workflow exists, report that fact; do not
+   `/wld:validate` to run Core validation with fresh Claude review and repair workers. Publication remains pending.
+   For planning or review actions, follow `/wld:plan-review`. If no workflow exists, report that fact; do not
    activate a new request.
 
 Stay in Claude Code and the browser. Use no RunWield CLI or TUI commands. Use host tools normally; no permission hooks

@@ -24,7 +24,7 @@ Core owns host and version compatibility.
    revision/action change or timeout; repeat with the returned revision if still pending. Do not use shell sleep or fetch
    full status.
 3. For a `triage` action, fetch `get_instructions` with the workflow and action IDs, use `context.requestText` as the
-   user's request, follow the Router instructions, and call `triage_report`. Continue with the `/connect:request` flow
+   user's request, follow the Router instructions, and call `triage_report`. Continue with the `/wld:request` flow
    from its returned action; do not activate another request.
    For a `plan` action, fetch its current instructions with `get_instructions` using `workflowId` and `actionId`, then
    follow the Planner instructions and returned `context` (feedback, image paths, project setup, and note). Use
@@ -33,12 +33,12 @@ Core owns host and version compatibility.
    For feedback, revise and call `plan_written` with the new
    action ID and current workflow revision.
 4. For `plan_saved`, report that the Plan is Ready For Work, saved for later, and stop. Tell the user
-   `/connect:implement` starts it. For `plan_ready`, immediately call `start_execution` with the current workflow ID and revision, a new operation ID,
-   and `payload: {}`. Then follow the Implementation flow in `/connect:request`: ask any plain-text consent question,
+   `/wld:implement` starts it. For `plan_ready`, immediately call `start_execution` with the current workflow ID and revision, a new operation ID,
+   and `payload: {}`. Then follow the Implementation flow in `/wld:request`: ask any plain-text consent question,
    disclose the execution directory and branch, dispatch a fresh host subagent without host worktree isolation, and
    submit its bullet report as `task_completed.message` from this conversation. After a decline, stop; do not restart.
-5. For `implementation`, restore the worker with `/connect:implement`. For `implemented`, `validation`, `validation_running`, or
-   `validation_recovery`, follow `/connect:validate`. Publication remains pending after validation. An absent workflow
+5. For `implementation`, restore the worker with `/wld:implement`. For `implemented`, `validation`, `validation_running`, or
+   `validation_recovery`, follow `/wld:validate`. Publication remains pending after validation. An absent workflow
    does not create a new request.
 
 ## Review chat

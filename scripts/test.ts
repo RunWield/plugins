@@ -30,11 +30,14 @@ try {
     manifest.name = "runwield";
     await writeFile(manifestPath, JSON.stringify(manifest));
     const example = join(source, "src/attached/codex/plugin/skills/run/example.md");
-    await writeFile(example, "Use $runwield:run; keep the RunWield brand and runwield MCP server name.\n");
+    await writeFile(
+        example,
+        "Use $runwield:run, $connect:run, /runwield:request, /connect:request; keep the RunWield brand and runwield MCP server name.\n",
+    );
     await buildPackage(source, output, release);
     assert.equal(
         await readFile(join(output, "plugins/codex/skills/run/example.md"), "utf8"),
-        "Use $connect:run; keep the RunWield brand and runwield MCP server name.\n",
+        "Use $wld:run, $wld:run, /wld:request, /wld:request; keep the RunWield brand and runwield MCP server name.\n",
     );
     const packaged = JSON.parse(await readFile(join(output, "plugins/codex/.codex-plugin/plugin.json"), "utf8"));
     assert.equal(packaged.version, manifest.version, "Adapter version must not be changed by distribution");

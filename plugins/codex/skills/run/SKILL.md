@@ -13,7 +13,7 @@ RunWield CLI or TUI for the user. Ordinary Codex tools and permissions remain av
 
 Use the user's intent to choose:
 
-- **New work**, such as `$connect:run add CSV export`: call `activate` with a new unique `operationId` and
+- **New work**, such as `$wld:run add CSV export`: call `activate` with a new unique `operationId` and
   `payload: { requestText, hostRequestId }`. Put only this request in `requestText`. Use a request identifier supplied
   by Codex when available, otherwise generate a UUID. Keep those IDs when retrying an activation that returned no
   result. The installed MCP server supplies host and adapter evidence; do not construct or override it.
@@ -21,7 +21,7 @@ Use the user's intent to choose:
   `payload.existingPlan: { planName, planId, targetBranch? }`. Use the selected Plan's name relative to `docs/plans/`
   without `.md`, and its actual Plan ID. Select only the child the user named. Do not encode the selection solely in
   request prose or choose another child. If a workflow already exists for that request, continue it instead.
-- **Continue existing work**, such as `$connect:run resume` or `$connect:run implement the saved Plan`: first call `status`
+- **Continue existing work**, such as `$wld:run resume` or `$wld:run implement the saved Plan`: first call `status`
   with `inspectOnly: true` and the known `workflowId`, or only `{ inspectOnly: true }` to inspect the most recent open
   workflow in this repository without continuing it. Do not activate a new
   request when a resume finds no workflow or the conversation has lost context. Report the result.
