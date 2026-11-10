@@ -10,9 +10,14 @@ export interface Release {
     url: string;
 }
 
+interface PluginInterface {
+    websiteURL?: string;
+}
+
 interface Manifest {
     name: string;
     version: string;
+    interface?: PluginInterface;
 }
 
 interface Provenance extends Release {
@@ -90,6 +95,10 @@ export async function buildPackage(source: string, destination: string, release:
         const manifest: Manifest = JSON.parse(await readFile(manifestPath, "utf8"));
         assert(["runwield", "connect", "wld"].includes(manifest.name), "Unexpected upstream plugin identity");
         manifest.name = "wld";
+        if (host === "codex") {
+            assert(manifest.interface, "Missing Codex listing metadata");
+            manifest.interface.websiteURL = "https://runwield.dev/downloads";
+        }
         // Adapter versions participate in Core's compatibility checks. Preserve them.
         await writeJson(manifestPath, manifest);
     }
@@ -142,6 +151,7 @@ export async function checkPackage(root: string): Promise<void> {
         const directory = join(root, "plugins", host);
         const manifest: Manifest = JSON.parse(await readFile(join(directory, `.${host}-plugin/plugin.json`), "utf8"));
         assert.equal(manifest.name, "wld");
+        if (host === "codex") assert.equal(manifest.interface?.websiteURL, "https://runwield.dev/downloads");
         assert.match(manifest.version, /^\d+\.\d+\.\d+/);
         for (const file of await filesUnder(directory)) {
             if (file.endsWith(".json")) JSON.parse(await readFile(join(directory, file), "utf8"));

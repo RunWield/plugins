@@ -28,6 +28,7 @@ try {
     const manifestPath = join(source, "src/attached/codex/plugin/.codex-plugin/plugin.json");
     const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
     manifest.name = "runwield";
+    delete manifest.interface.websiteURL;
     await writeFile(manifestPath, JSON.stringify(manifest));
     const example = join(source, "src/attached/codex/plugin/skills/run/example.md");
     await writeFile(
@@ -40,6 +41,7 @@ try {
         "Use $wld:run, $wld:run, /wld:request, /wld:request; keep the RunWield brand and runwield MCP server name.\n",
     );
     const packaged = JSON.parse(await readFile(join(output, "plugins/codex/.codex-plugin/plugin.json"), "utf8"));
+    assert.equal(packaged.interface.websiteURL, "https://runwield.dev/downloads");
     assert.equal(packaged.version, manifest.version, "Adapter version must not be changed by distribution");
     for (const host of ["codex", "claude"]) {
         assert.equal(

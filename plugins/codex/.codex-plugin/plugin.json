@@ -21,6 +21,7 @@
         "shortDescription": "Planning and verification inside Codex",
         "longDescription": "Explicitly run one request through RunWield planning, browser review, isolated implementation, validation, and delivery. Requires compatible local RunWield Core on PATH. Codex owns every model call.",
         "developerName": "RunWield",
-        "category": "Developer Tools"
+        "category": "Developer Tools",
+        "websiteURL": "https://runwield.dev/downloads"
     }
 }

@@ -88,7 +88,8 @@ bun run test
 ```
 
 The exporter copies both host packages and their license from the released source. Its only package changes are the
-manifest name (`wld`) and command examples (`$wld:` or `/wld:`). It preserves adapter versions, contracts,
+manifest name (`wld`), command examples (`$wld:` or `/wld:`), and Codex listing website (`https://runwield.dev/downloads`).
+It preserves adapter versions, contracts,
 MCP launch configuration, and host policy metadata. Marketplace entries point at `plugins/codex` and `plugins/claude`.
 Do not hand-edit generated files; change workflow behavior upstream and publish a new release.
 

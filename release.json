@@ -14,7 +14,7 @@
         "plugins/claude/commands/request.md": "5bb81e0cb2b6b6d394940ba20c7ef076dc6e2f86cb72e9ffd8f9710ac0db867f",
         "plugins/claude/commands/validate.md": "e051d92cc2018c502fba2aee45801a6398dd377e4d99061ac445df111f9a616e",
         "plugins/claude/runwield-adapter.json": "89222dfe433dcce08ec68bf344e83c4eeb70123feaa728791308c385b9ed8283",
-        "plugins/codex/.codex-plugin/plugin.json": "268cc94ed66841c50c18826c9fac232f0339f56806f7c9b388360a331d7b5695",
+        "plugins/codex/.codex-plugin/plugin.json": "e185063fb995c7f3f14cf925ce12cfb370d4a490b846d2c0b3e4b0e9ffd53574",
         "plugins/codex/.mcp.json": "a2c2703880e1a63d6e740936774000a80c9d599764a8cc50596beece8321039f",
         "plugins/codex/runwield-adapter.json": "89222dfe433dcce08ec68bf344e83c4eeb70123feaa728791308c385b9ed8283",
         "plugins/codex/skills/run/SKILL.md": "975c60895a59abb82c03590eb408be39dac872b6fa6cc3477638c49671d5679f",
