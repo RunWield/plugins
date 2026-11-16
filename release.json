@@ -1,8 +1,8 @@
 {
     "repository": "RunWield/runwield",
-    "tag": "v0.14.5",
-    "commit": "dc5670363f1d61788bcb94fd93900ed9f12612ec",
-    "url": "https://github.com/RunWield/runwield/releases/tag/v0.14.5",
+    "tag": "v0.14.6",
+    "commit": "9814c225dbe5fe7da4400b5f7dbfba52fcfe6836",
+    "url": "https://github.com/RunWield/runwield/releases/tag/v0.14.6",
     "files": {
         ".agents/plugins/marketplace.json": "c072b2ef224b80fe207a8978bf735f41f3dba62bc5c35b2a1386c032dac60221",
         ".claude-plugin/marketplace.json": "d5843a41a69dac4b9a8708ddd0fd945e755bf0bfcade7b33fd0d92b2bd1e434f",
@@ -14,7 +14,7 @@
         "plugins/claude/commands/request.md": "5bb81e0cb2b6b6d394940ba20c7ef076dc6e2f86cb72e9ffd8f9710ac0db867f",
         "plugins/claude/commands/validate.md": "e051d92cc2018c502fba2aee45801a6398dd377e4d99061ac445df111f9a616e",
         "plugins/claude/runwield-adapter.json": "89222dfe433dcce08ec68bf344e83c4eeb70123feaa728791308c385b9ed8283",
-        "plugins/codex/.codex-plugin/plugin.json": "e185063fb995c7f3f14cf925ce12cfb370d4a490b846d2c0b3e4b0e9ffd53574",
+        "plugins/codex/.codex-plugin/plugin.json": "70274d4abd00c4fd44943c6784efb22ace78ddaeae3cc17ce625610981ce79be",
         "plugins/codex/.mcp.json": "a2c2703880e1a63d6e740936774000a80c9d599764a8cc50596beece8321039f",
         "plugins/codex/runwield-adapter.json": "89222dfe433dcce08ec68bf344e83c4eeb70123feaa728791308c385b9ed8283",
         "plugins/codex/skills/run/SKILL.md": "975c60895a59abb82c03590eb408be39dac872b6fa6cc3477638c49671d5679f",
